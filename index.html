@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ============================================================
+       SECTION 1: PAGE METADATA  (shows up in browser tab & link previews)
+       Edit the <title> and the two <meta> tags below to change them.
+       ============================================================ -->
+  <title>Workshop on Learning and Dynamical Systems | KTH</title>
+  <meta name="title" content="Workshop on Learning and Dynamical Systems – KTH">
+  <meta name="description" content="A one-day workshop on learning and dynamical systems: theory and applications, held at the Department of Decision and Control Systems, KTH Stockholm.">
+
+  <!-- Stylesheets (don't touch these unless you know what you're doing) -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       BASE — font size and box model.
+       To make ALL text bigger/smaller, change the font-size on body.
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.1rem;        /* ← global font size. try 1.15rem or 1.2rem */
+      line-height: 1.7;
+      color: #1f2937;
+      background: #fff;
+    }
+
+    /* ============================================================
+       CONTENT WRAP — controls the left/right margins for every section.
+       max-width = how wide the content can get.
+       padding   = how much space on each side (the "留白").
+       ============================================================ */
+    .content-wrap {
+      max-width: 860px;         /* ← change to e.g. 960px for wider content */
+      margin: 0 auto;
+      padding: 0 3rem;          /* ← change 3rem to e.g. 4rem for more 留白 */
+    }
+
+    /* ============================================================
+       SECTIONS — vertical spacing between blocks.
+       ============================================================ */
+    .page-section {
+      padding: 3.5rem 0;
+    }
+    .page-section.alt-bg {
+      background: #f9fafb;
+    }
+
+    /* ============================================================
+       HERO — NETCON-style big title + red bar + red subtitle.
+       ============================================================ */
+    .workshop-hero {
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+    }
+    .workshop-hero h1 {
+      font-weight: 800;
+      font-size: clamp(2rem, 5.5vw, 3.75rem);   /* responsive: shrinks on mobile */
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: #111827;
+      line-height: 1.1;
+    }
+    .workshop-hero .red-bar {
+      width: min(820px, 88%);
+      height: 8px;              /* ← thickness of the bar */
+      background: #ef4444;      /* ← bar colour */
+      margin: 1.75rem auto 1.5rem;
+      border-radius: 2px;
+    }
+    .workshop-hero .subtitle-line {
+      color: #ef4444;           /* ← subtitle colour, same red */
+      font-weight: 600;
+      font-size: clamp(1rem, 1.6vw, 1.2rem);
+      line-height: 1.8;
+    }
+
+    /* ============================================================
+       SECTION HEADINGS
+       ============================================================ */
+    .section-title {
+      text-align: center;
+      font-size: 1.9rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: #1f2937;
+    }
+
+    /* ============================================================
+       ABOUT — plain paragraph
+       ============================================================ */
+    .about-text {
+      text-align: justify;
+      font-size: 1.08rem;
+    }
+
+    /* ============================================================
+       VENUE CARDS — two cards side by side.
+       To stack them vertically, delete the  display:flex  line.
+       ============================================================ */
+    .venue-cards {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;          /* auto-stacks on narrow screens */
+    }
+    .info-card {
+      flex: 1;
+      min-width: 220px;         /* never shrinks below this */
+      background: #f3f4f6;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+    }
+    .info-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .info-card p { margin-bottom: 0.6rem; }
+    .info-card a { color: #2563eb; }
+    .info-card .hint {
+      color: #9ca3af;
+      font-size: 0.88rem;
+      font-style: italic;
+    }
+
+    /* ============================================================
+       SCHEDULE TABLE
+       ============================================================ */
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1rem;
+    }
+    .schedule-table th,
+    .schedule-table td {
+      padding: 0.85rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+      vertical-align: top;
+    }
+    .schedule-table th {
+      font-weight: 600;
+      color: #374151;
+      background: #f9fafb;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .schedule-table td.time {
+      font-weight: 700;
+      color: #ef4444;           /* ← time column colour — matches red theme */
+      white-space: nowrap;
+      width: 90px;
+    }
+    .schedule-table tr.break td,
+    .schedule-table tr.logistics td {
+      background: #f9fafb;
+      font-style: italic;
+      color: #6b7280;
+    }
+    .schedule-table .speaker   { font-weight: 600; }
+    .schedule-table .affiliation { color: #6b7280; font-size: 0.93rem; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       SECTION 2: HERO  —  the big title block at the top.
+       Edit the <h1>, the date line, and the venue line.
+       The red bar is just a <div class="red-bar"></div>. To change
+       its color, edit  background: #ef4444  in the <style> block above.
+       ============================================================ -->
+  <section class="workshop-hero">
+    <h1>Learning and Dynamical Systems:<br>Theory and Applications</h1>
+    <div class="red-bar"></div>
+    <div class="subtitle-line">
+      Thursday, June 4, 2026 &nbsp;·&nbsp; 13:00&ndash;17:00
+      <span class="venue">@ Harry Nyquist room, Department of Decision and Control Systems, KTH</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 3: ABOUT  —  one short paragraph.
+       Replace the text inside the <p> with your description, or
+       delete this entire <section> if you don't want it.
+       ============================================================ -->
+  <section class="page-section alt-bg">
+    <div class="content-wrap">
+      <h2 class="section-title">About</h2>
+      <p class="about-text">
+        This one-day workshop brings together researchers working at the
+        intersection of <strong>machine learning</strong> and
+        <strong>dynamical systems</strong>. Talks will cover recent
+        theoretical advances as well as applications across control,
+        robotics, and the physical sciences. The event is hosted by the
+        Department of Decision and Control Systems at KTH.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 4: VENUE & CONTACT
+       Edit the address, the KTH room link, and the contact email.
+       ============================================================ -->
+  <section class="page-section">
+    <div class="content-wrap">
+      <h2 class="section-title">Venue &amp; Contact</h2>
+      <div class="venue-cards">
+
+        <div class="info-card">
+          <h3>Venue</h3>
+          <p>
+            <strong>Harry Nyquist room</strong><br>
+            Malvinas väg 10<br>
+            KTH Royal Institute of Technology<br>
+            Stockholm, Sweden
+          </p>
+          <p>
+            <a href="https://www.kth.se/places/room/id/1aba6730-e883-41ea-a8fa-8484e4c6858c?l=en"
+               target="_blank" rel="noopener">Room details on kth.se ↗</a>
+          </p>
+        </div>
+
+        <div class="info-card">
+          <h3>Contact</h3>
+          <p>
+            For questions about the workshop, please contact:<br>
+            <a href="mailto:organizer@kth.se">organizer@kth.se</a>
+          </p>
+          <p class="hint">(organizer email)</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 5: SCHEDULE  —  the main table.
+       To add/remove/change a talk: edit one <tr> row.
+       Each row is one time slot. The format is:
+           <td class="time">HH:MM</td>
+           <td><span class="speaker">Name</span>
+               <div class="affiliation">Institution</div></td>
+       Use class="break" or class="logistics" on the <tr> for
+       non-talk rows (Lunch, Coffee, Welcome, Closing).
+       ============================================================ -->
+  <section class="page-section alt-bg">
+    <div class="content-wrap">
+      <h2 class="section-title">Schedule &amp; Participation</h2>
+
+      <table class="schedule-table">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Talk</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr class="logistics">
+            <td class="time">11:45</td>
+            <td>Lunch (Syster o bror)</td>
+          </tr>
+
+          <tr class="logistics">
+            <td class="time">13:00</td>
+            <td>Welcome</td>
+          </tr>
+
+          <tr>
+            <td class="time">13:15</td>
+            <td>
+              <span class="speaker">Giancarlo Ferrari-Trecate</span>
+              <div class="affiliation">EPFL</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="time">13:45</td>
+            <td>
+              <span class="speaker">Andrea Martin</span>
+              <div class="affiliation">KTH</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="time">14:00</td>
+            <td>
+              <span class="speaker">Maarten Schoukens</span>
+              <div class="affiliation">Eindhoven University of Technology</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="time">14:30</td>
+            <td>
+              <span class="speaker">Amritam Das</span>
+              <div class="affiliation">Eindhoven University of Technology</div>
+            </td>
+          </tr>
+
+          <tr class="break">
+            <td class="time">15:00</td>
+            <td>Coffee break</td>
+          </tr>
+
+          <tr>
+            <td class="time">15:15</td>
+            <td>
+              <span class="speaker">João Sousa</span>
+              <div class="affiliation">University of Porto</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="time">15:45</td>
+            <td>
+              <span class="speaker">Ralf Bachmayer</span>
+              <div class="affiliation">University of Bremen</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="time">16:15</td>
+            <td>
+              <span class="speaker">Shervin Bagheri</span>
+              <div class="affiliation">KTH</div>
+            </td>
+          </tr>
+
+          <tr class="logistics">
+            <td class="time">17:00</td>
+            <td>Closing remarks</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 6: FOOTER  (currently empty — remove or add as needed)
+       ============================================================ -->
+  <footer style="padding: 2rem 1.5rem;"></footer>
+
+</body>
+</html>
